@@ -16,7 +16,7 @@
         templateUrl: '/templates/album.html'
       })
       .state('collection', {
-        url: '/collection',
+        url: '/',
         templateUrl: '/templates/collection.html'
       });
   }
