@@ -25,8 +25,7 @@
     */
     var setSong = function(title) {
       if (currentBuzzObject) {
-        currentBuzzObject.stop();
-        SongPlayer.currentSong.playing = null;
+    stopSong(title);
       }
 
       currentBuzzObject = new buzz.sound(title.audioUrl, {
@@ -45,6 +44,15 @@
       currentBuzzObject.play();
       title.playing = true;
     }
+    /*
+    * @function stopSong
+    * @desc Sets the state of title.playing to null and stops the current song
+    * @param {Object} song
+    */
+    var stopSong = function(title) {
+      currentBuzzObject.stop();
+      title.playing = null;
+    }
     /* @function getSongIndex
     * @desc function to display what song is currently playing from the current album
   * @type {object} song
@@ -52,6 +60,7 @@
     var getSongIndex = function(title) {
       return currentAlbum.songs.indexOf(title);
     }
+
 
     SongPlayer.currentSong = null;
 
@@ -82,8 +91,23 @@
       currentSongIndex--;
 
       if (currentSongIndex < 0) {
-        currentBuzzObject.stop();
-        SongPlayer.currentSong.playing = null;
+        stopSong(title);
+      } else {
+        var song = currentAlbum.songs[currentSongIndex];
+        setSong(song);
+        playSong(song);
+      }
+    };
+    /* @function SongPlayer.next
+    * @desc function to allow the user to select the next song on the album
+  * @type {object}
+    */
+    SongPlayer.next = function() {
+      var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+      currentSongIndex++;
+
+      if (currentSongIndex === undefined ) {
+        stopSong(title);
       } else {
         var song = currentAlbum.songs[currentSongIndex];
         setSong(song);
