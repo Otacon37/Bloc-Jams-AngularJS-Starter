@@ -25,7 +25,7 @@
     */
     var setSong = function(title) {
       if (currentBuzzObject) {
-    stopSong(title);
+      stopSong(title);
       }
 
       currentBuzzObject = new buzz.sound(title.audioUrl, {
@@ -41,6 +41,7 @@
     * @param {Object} song
     */
     var playSong = function(title) {
+
       currentBuzzObject.play();
       title.playing = true;
     }
@@ -50,8 +51,11 @@
     * @param {Object} song
     */
     var stopSong = function(title) {
+
       currentBuzzObject.stop();
       title.playing = null;
+
+      // console.log('inside of stopSong' + title);
     }
     /* @function getSongIndex
     * @desc function to display what song is currently playing from the current album
@@ -65,14 +69,16 @@
     SongPlayer.currentSong = null;
 
     SongPlayer.play = function(title) {
-      title = title || SongPlayer.currentSong;
-      if (SongPlayer.currentSong !== title) {
 
+      if (SongPlayer.currentSong !== title) {
+        if (SongPlayer.currentSong !== null) {
+          stopSong(SongPlayer.currentSong);
+        }
       setSong(title);
       playSong(title);
     } else if (SongPlayer.currentSong === title) {
       if (currentBuzzObject.isPaused()) {
-        playsong(title);
+        playSong(title);
       }
     }
     };
@@ -80,7 +86,7 @@
     SongPlayer.pause = function(title) {
       title = title || SongPlayer.currentSong;
       currentBuzzObject.pause();
-      title.playing = false;
+      title.playing = null;
     };
     /* @method SongPlayer.previous
     * @desc method to allow the user to select the previous song on the album
@@ -122,3 +128,5 @@
     .module('blocJams')
     .factory('SongPlayer', ['Fixtures', SongPlayer]);
 })();
+
+ 
