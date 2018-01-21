@@ -1,4 +1,8 @@
 (function() {
+  /* @function SongPlayer
+ * @desc function to allow the app to play and pause music
+* @type {object}
+ */
   function SongPlayer () {
     var SongPlayer = {};
 
@@ -16,6 +20,18 @@
         currentBuzzObject.stop();
         currentSong.playing = null;
       }
+
+    /*
+    * @function playSong
+    * @desc Sets the state of title.playing to true and plays the current song
+    * @param {Object} song
+    */
+    var playSong = function(song) {
+      if (currentBuzzObject) {
+        currentBuzzObject.play();
+        song.playing = true;
+      }
+    }
 
 
     currentBuzzObject = new buzz.sound(song.audioUrl, {
