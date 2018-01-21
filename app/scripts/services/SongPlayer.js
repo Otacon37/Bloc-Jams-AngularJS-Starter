@@ -6,7 +6,7 @@
   function SongPlayer () {
     var SongPlayer = {};
 
-    var currentSong = null;
+
     var currentBuzzObject = null;
 
 
@@ -18,7 +18,7 @@
     var setSong = function(song) {
       if (currentBuzzObject) {
         currentBuzzObject.stop();
-        currentSong.playing = null;
+        SongPlayer.currentSong.playing = null;
       }
 
     /*
@@ -39,16 +39,23 @@
       preload: true
     });
 
-    currentSong = song;
+    SongPlayer.currentSong = song;
   };
 
+  /*
+* @desc Active song object from list of songs
+* @type {Object}
+*/
+
+  SongPlayer.currentSong = null;
+
     SongPlayer.play = function(song) {
-      if (currentSong !== song) {
+      if (SongPlayer.currentSong !== song) {
 
       setSong(song);
       currentBuzzObject.play();
       song.playing = true;
-    } else if (currentSong === song) {
+    } else if (SongPlayer.currentSong === song) {
       if (currentBuzzObject.isPaused()) {
         currentBuzzObject.play();
         song.playing = true;
