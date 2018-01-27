@@ -45,6 +45,10 @@
             });
           });
 
+        scope.thumbStyle = function () {
+          return prop('thumb');
+        }
+
           $document.bind('mouseup.thumb', function() {
             $document.unbind('mousemove.thumb');
             $document.unbind('mouseup.thumb');
