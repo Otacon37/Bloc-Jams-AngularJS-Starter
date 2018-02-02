@@ -28,6 +28,15 @@
     }
 
     /*
+    * @function muteSong
+    * @desc Sets the volume of the current song to 0
+    * @param {Object} songs
+    */
+    var muteSong = function(song) {
+      currentBuzzObject.toggleMute();
+    }
+
+    /*
     * @function setSong
     * @desc Stops currently playing song and loads new audio file as currentBuzzObject
     * @param {Object} song
@@ -96,6 +105,11 @@
       song = song || SongPlayer.currentSong;
       currentBuzzObject.pause();
       song.playing = false;
+    };
+
+    SongPlayer.mute = function(song) {
+      song = song || SongPlayer.currentSong;
+      muteSong(song);
     };
     /*
     @method previous
