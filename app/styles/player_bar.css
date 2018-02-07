@@ -157,6 +157,12 @@
   text-decoration: none;
 }
 
+.player-bar:hover .volume .iconUnmute {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .player-bar .volume .seek-bar {
     display: inline-block;
     width: 5.75rem;

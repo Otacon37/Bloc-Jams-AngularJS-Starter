@@ -29,11 +29,16 @@
 
     /*
     * @function muteSong
-    * @desc Sets the volume of the current song to 0
+    * @desc toggles the mute of the current song
     * @param {Object} songs
     */
     var muteSong = function(song) {
       currentBuzzObject.toggleMute();
+      if (currentBuzzObject.isMuted()) {
+        song.muted = true;
+      } else {
+        song.muted = false;
+      }
     }
 
     /*
